@@ -3,31 +3,31 @@ import { gql } from "graphql-request";
 class CountriesQueries {
   fetchCountries() {
     return gql`
-      query countries($input: CountryFilterInput) {
-        countries(filter: $input) {
-          name
-          phone
-          currency
+      query ($options: PageQueryOptions) {
+        posts(options: $options) {
+          data {
+            id
+            title
+          }
+          meta {
+            totalCount
+          }
         }
       }
     `;
   }
 }
 
-const countryQuery =  new CountriesQueries();
+const countryQuery = new CountriesQueries();
 
+import { graphQLClient } from "./AxiosInstance";
 
-import { graphQLClient } from './AxiosInstance';
-
-import { CountryFilterInput, Query } from "@/gql/graphql";
-
-
+import { PageQueryOptions, PostsPage } from "@/gql/graphql";
 
 export const CountryService = {
-
-  getAll: async (filterInput?:CountryFilterInput): Promise<Query> =>  {
-   return graphQLClient.request(countryQuery.fetchCountries(), {input: filterInput});
+  getAll: async (filterInput?: PageQueryOptions): Promise<PostsPage[]> => {
+    return graphQLClient.request(countryQuery.fetchCountries(), {
+      options: filterInput,
+    });
   },
-
 };
-

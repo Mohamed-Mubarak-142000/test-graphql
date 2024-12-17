@@ -1,35 +1,46 @@
-import { Country } from '@/gql/graphql';
+import { Post } from "@/gql/graphql";
 
-import { IsNotEmpty, IsOptional, IsString, validateSync} from 'class-validator';
-import {  plainToClass, Expose, Transform } from 'class-transformer';
+import { IsNotEmpty, IsNumber, IsString, validateSync } from "class-validator";
+import { plainToClass, Expose, Transform } from "class-transformer";
 
-export class CountryDTO  {
-  @Expose({ name: 'name' })
+export class PostDTO {
+  @Expose({ name: "title" })
   @Transform(({ value }) => value?.toLowerCase())
   @IsNotEmpty()
   countryName!: string;
 
-  @IsOptional()
-  @IsString()
-  currency?: string;
-
+  @IsNumber()
   @IsNotEmpty()
-  phone!: string;
+  id!: number;
+
+  @IsString()
+  @IsNotEmpty()
+  title!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  body!: string;
 }
 
-export function validateAndTransformCountries(data: Country[]): CountryDTO[] {
-  return data.map(country => {
-   
-    const countryDTO = plainToClass(CountryDTO, country);
+export function validateAndTransformCountries(posts: Post[]): PostDTO[] {
+  console.log("ddddd", posts);
 
-    const errors = validateSync(countryDTO, { whitelist: true, forbidNonWhitelisted: true });
-  
+  return posts.map((post) => {
+    const postDTO = plainToClass(PostDTO, post);
+
+    const errors = validateSync(postDTO, {
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    });
+
     if (errors.length > 0) {
-      throw new Error(`Validation failed: ${errors.map(err => JSON.stringify(err.constraints)).join(', ')}`);
+      throw new Error(
+        `Validation failed: ${errors
+          .map((err) => JSON.stringify(err.constraints))
+          .join(", ")}`
+      );
     }
-   
-    return countryDTO;
+
+    return postDTO;
   });
 }
-
-

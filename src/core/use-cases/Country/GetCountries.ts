@@ -1,9 +1,9 @@
-import { CountryRepository } from "@/adapters/gateways/CountryRepository";
+import { PostRepository } from "@/adapters/gateways/CountryRepository";
 
-export class GetCountries {
-  constructor(private countryRepository: CountryRepository) {}
+export class GetPosts {
+  constructor(private postRepository: PostRepository) {}
 
   execute() {
-    return this.countryRepository.getCountries();
+    return this.postRepository.getPosts();
   }
 }

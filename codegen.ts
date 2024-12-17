@@ -1,22 +1,17 @@
-
-import type { CodegenConfig } from '@graphql-codegen/cli';
-
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   overwrite: true,
-  schema: "https://countries.trevorblades.com",
-  documents: 'src/**/*.{ts,tsx}',
+  schema: "https://graphqlzero.almansi.me/api",
   generates: {
-    "./src/gql/": {
+    "src/gql/": {
       preset: "client",
-      plugins: [ 'typescript', // Generate TypeScript types for schema
-        'typescript-operations', // Generate TypeScript types for queries/mutations
-        ]
+      plugins: [],
     },
     "./graphql.schema.json": {
-      plugins: ["introspection"]
-    }
-  }
+      plugins: ["introspection"],
+    },
+  },
 };
 
 export default config;

@@ -1,28 +1,19 @@
-import { useQuery} from '@tanstack/react-query';
- import { container } from '@/infrastructure/di/container';
- import { TYPES } from '@/infrastructure/di/types';
- import { CountryRepository } from '@/adapters/gateways/CountryRepository';
-import { CountryFilterInput } from '@/gql/graphql';
+import { useQuery } from "@tanstack/react-query";
+import { container } from "@/infrastructure/di/container";
+import { TYPES } from "@/infrastructure/di/types";
+import { PostRepository } from "@/adapters/gateways/CountryRepository";
+import { PageQueryOptions } from "@/gql/graphql";
 
+export const useCountriesQueries = () => {
+  const PostRepository = container.get<PostRepository>(TYPES.PostRepository);
 
+  const useGetAllCountries = (options: PageQueryOptions) =>
+    useQuery({
+      queryKey: ["posts", JSON.stringify(options)],
+      queryFn: () => PostRepository.getPosts(options),
+    });
 
- 
- 
- export const useCountriesQueries = () => {
-   const CountryRepository = container.get<CountryRepository>(TYPES.CountryRepository);
- 
- 
-   const useGetAllCountries = (input:CountryFilterInput) =>
-     useQuery(
-     {
-       queryKey: ["countries",JSON.stringify(input)],
-       queryFn: () => CountryRepository.getCountries(input)
-     }
-     );
-
-
-   return {
-        useGetAllCountries, 
-    };
- };
- 
+  return {
+    useGetAllCountries,
+  };
+};

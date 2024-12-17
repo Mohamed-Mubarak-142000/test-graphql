@@ -1,17 +1,14 @@
 import { injectable } from "inversify";
-
-import { CountryRepository } from "@/adapters/gateways/CountryRepository";
-import {  CountryService } from "../api/CountryService";
-import { CountryFilterInput } from "@/gql/graphql";
+import { PostRepository } from "@/adapters/gateways/CountryRepository";
+import { CountryService } from "../api/CountryService";
 import { validateAndTransformCountries } from "@/core/entities/Country";
-
-
-
+import { PageQueryOptions } from "@/gql/graphql";
 
 @injectable()
-export class CountryRepositoryImpl implements CountryRepository {
-  async getCountries(input?:CountryFilterInput) {
-    return validateAndTransformCountries((await CountryService.getAll(input)).countries);
+export class PostsRepositoryImpl implements PostRepository {
+  async getPosts(options?: PageQueryOptions) {
+    return validateAndTransformCountries(
+      (await CountryService.getAll(options)).data.posts
+    );
   }
 }
-

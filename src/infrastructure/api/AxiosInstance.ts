@@ -1,13 +1,12 @@
 // import axios from 'axios';
 
+import { GraphQLClient } from "graphql-request";
 
-import { GraphQLClient } from 'graphql-request';
-
-const endpoint = 'https://countries.trevorblades.com/';
-
+// const endpoint = "https://countries.trevorblades.com/";
+const endpoint = "https://graphqlzero.almansi.me/api";
 export const graphQLClient = new GraphQLClient(endpoint, {
   headers: {
-   'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     Authorization: `Bearer YOUR_ACCESS_TOKEN`,
   },
 });
