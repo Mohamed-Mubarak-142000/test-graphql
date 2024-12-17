@@ -1,4 +1,4 @@
-import { PostRepository } from "@/adapters/gateways/CountryRepository";
+import { PostRepository } from "@/adapters/gateways/PostRepository";
 export class GetPosts {
   constructor(private postRepository: PostRepository) {}
 

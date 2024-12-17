@@ -25,7 +25,7 @@ export class PostDTO {
 export function validateAndTransformCountries(posts: Post[]): PostDTO[] {
   console.log("ddddd", posts);
 
-  return posts.map((post) => {
+  return posts?.map((post) => {
     const postDTO = plainToClass(PostDTO, post);
 
     const errors = validateSync(postDTO, {

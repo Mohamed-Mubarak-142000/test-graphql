@@ -25,7 +25,7 @@ import { graphQLClient } from "./AxiosInstance";
 import { PageQueryOptions, PostsPage } from "@/gql/graphql";
 
 export const CountryService = {
-  getAll: async (filterInput?: PageQueryOptions): Promise<PostsPage[]> => {
+  getAll: async (filterInput?: PageQueryOptions): Promise<PostsPage> => {
     return graphQLClient.request(countryQuery.fetchCountries(), {
       options: filterInput,
     });

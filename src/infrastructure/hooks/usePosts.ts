@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { container } from "@/infrastructure/di/container";
+import { container } from "@/infrastructure/di/posts";
 import { TYPES } from "@/infrastructure/di/types";
-import { PostRepository } from "@/adapters/gateways/CountryRepository";
+import { PostRepository } from "@/adapters/gateways/PostRepository";
 import { PageQueryOptions } from "@/gql/graphql";
 
 export const usePostsQueries = () => {

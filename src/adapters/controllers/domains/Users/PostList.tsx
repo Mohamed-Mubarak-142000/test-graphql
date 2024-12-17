@@ -1,6 +1,6 @@
 import React from "react";
 
-import { usePostsQueries } from "@/infrastructure/hooks/useCountries";
+import { usePostsQueries } from "@/infrastructure/hooks/usePosts";
 import { Input } from "@/components/ui/input";
 
 export const UserList: React.FC = () => {

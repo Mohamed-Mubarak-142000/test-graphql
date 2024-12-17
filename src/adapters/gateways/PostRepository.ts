@@ -1,4 +1,4 @@
-import { PostDTO } from "@/core/entities/Country";
+import { PostDTO } from "@/core/entities/Post";
 import { PageQueryOptions } from "@/gql/graphql";
 // import { CountryFilterInput } from "@/gql/graphql";
 

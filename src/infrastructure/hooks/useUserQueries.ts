@@ -1,24 +1,19 @@
-import { useQuery,
-   useMutation, useQueryClient 
-  } from '@tanstack/react-query';
-import { container } from '@/infrastructure/di/container';
-import { TYPES } from '@/infrastructure/di/types';
-import { UserRepository } from '@/adapters/gateways/UserRepository';
-import { User } from '@/core/entities/User';
-import { toast } from 'sonner';
-
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { container } from "@/infrastructure/di/posts";
+import { TYPES } from "@/infrastructure/di/types";
+import { UserRepository } from "@/adapters/gateways/UserRepository";
+import { User } from "@/core/entities/User";
+import { toast } from "sonner";
 
 export const useUserQueries = () => {
   const userRepository = container.get<UserRepository>(TYPES.UserRepository);
   const queryClient = useQueryClient();
 
   const useUsers = () =>
-    useQuery<User[]>(
-    {
+    useQuery<User[]>({
       queryKey: ["users"],
-      queryFn: () => userRepository.getUsers()
-    }
-    );
+      queryFn: () => userRepository.getUsers(),
+    });
 
   // const useCreateUser = () =>
   //   useMutation(
@@ -43,18 +38,17 @@ export const useUserQueries = () => {
   //   );
 
   const useDeleteUser = () =>
-    useMutation(
-      {
-        mutationFn: (id: string) => userRepository.deleteUser(id),
-        onSuccess: () => queryClient.refetchQueries({ queryKey: ["users"] }),
-        onError: (error) => {
-          toast.error(error.message);
-        }
-      }
-    );
+    useMutation({
+      mutationFn: (id: string) => userRepository.deleteUser(id),
+      onSuccess: () => queryClient.refetchQueries({ queryKey: ["users"] }),
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
 
-  return { useUsers, 
-    // useCreateUser, useUpdateUser, 
-    useDeleteUser
-   };
+  return {
+    useUsers,
+    // useCreateUser, useUpdateUser,
+    useDeleteUser,
+  };
 };

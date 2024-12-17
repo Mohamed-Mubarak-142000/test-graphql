@@ -5,8 +5,8 @@ import { TYPES } from "./types";
 // import { UserRepositoryImpl } from "../repositories/UserRepositoryImpl";
 // import { ProductRepository } from "@/adapters/gateways/ProductRepository";
 // import { ProductRepositoryImpl } from "../repositories/ProductRepositoryImpl";
-import { PostRepository } from "@/adapters/gateways/CountryRepository";
-import { PostsRepositoryImpl } from "../repositories/CountryRepositoryImpl";
+import { PostRepository } from "@/adapters/gateways/PostRepository";
+import { PostsRepositoryImpl } from "../repositories/PostRepositoryImpl";
 
 const container = new Container();
 
